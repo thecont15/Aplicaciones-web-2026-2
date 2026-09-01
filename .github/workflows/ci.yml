@@ -9,10 +9,9 @@ on:
       - main
 
 jobs:
-  verificar:
-    name: Verificar codigo, formato PEP 8 y conexion a la base de datos
+  lint:
+    name: Verificar PEP 8
     runs-on: ubuntu-latest
-    environment: DATABASE_URL
 
     steps:
       - name: Checkout del repositorio
@@ -33,27 +32,12 @@ jobs:
       - name: Validar formato PEP 8
         run: flake8 src --max-line-length=100 --extend-ignore=E203,W503
 
-  db-check:
-    name: Verificar conexión a la base de datos
+  app-check:
+    name: Verificar app y base de datos
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/app_db
-
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_DB: app_db
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U postgres -d app_db"
-          --health-interval=10s
-          --timeout=5s
-          --retries=5
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: Checkout del repositorio
@@ -73,22 +57,6 @@ jobs:
       - name: Validar sintaxis
         run: python -m compileall src
 
-      - name: Verificar conexión con PostgreSQL
-        run: |
-          python - <<'PY'
-          import os
-          from sqlalchemy import create_engine, text
-
-          database_url = os.getenv("DATABASE_URL")
-          engine = create_engine(database_url)
-
-          with engine.connect() as connection:
-              result = connection.execute(text("SELECT 1"))
-              print("Resultado SQL:", result.scalar())
-
-          print("Conexión a PostgreSQL exitosa")
-          PY
-
       - name: Verificar importación de la app
         run: |
           python - <<'PY'
@@ -96,3 +64,7 @@ jobs:
           print(app.title)
           print('FastAPI app cargada correctamente')
           PY
+
+      - name: Verificar conexión a PostgreSQL
+        run: |
+          python -m scripts.verificar_bd
