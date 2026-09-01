@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 
 from src.crud import vendedor as vendedor_crud
 from src.database.database import get_db
-from src.entities.vendedor import Vendedor
 
 router = APIRouter(prefix="/vendedores", tags=["Vendedores"])
 
