@@ -2,13 +2,14 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from src.api.vendedor import router as vendedor_router
-from src.database.database import Base, engine
+from src.database.database import engine
+from src.entities.vendedor import Vendedor
+from src.routers.vendedor import router as vendedor_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Base.metadata.create_all(bind=engine)
+    Vendedor.metadata.create_all(bind=engine)
     yield
 
 
