@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Verificar PEP 8
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8
+
+      - name: Validar formato PEP 8
+        run: flake8 src --max-line-length=100 --extend-ignore=E203,W503
+
+  app-check:
+    name: Verificar app y base de datos
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validar sintaxis
+        run: python -m compileall src
+
+      - name: Verificar importación de la app
+        run: |
+          python - <<'PY'
+          from src.main import app
+          print(app.title)
+          print('FastAPI app cargada correctamente')
+          PY
+
+      - name: Verificar conexión a PostgreSQL
+        run: |
+          python -m scripts.verificar_bd
