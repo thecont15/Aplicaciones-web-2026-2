@@ -1,39 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, ConfigDict
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from src.crud import cliente as cliente_crud
 from src.database.database import get_db
-from src.entities.cliente import Cliente
+from src.schemas.cliente import ClienteActualizar, ClienteCrear, ClienteRespuesta
 
 router = APIRouter(prefix="/clientes", tags=["Clientes"])
-
-
-class ClienteBase(BaseModel):
-    nombre: str
-    apellido: str
-    email: str
-    telefono: str | None = None
-    activo: bool = True
-
-
-class ClienteCrear(ClienteBase):
-    pass
-
-
-class ClienteActualizar(BaseModel):
-    nombre: str | None = None
-    apellido: str | None = None
-    email: str | None = None
-    telefono: str | None = None
-    activo: bool | None = None
-
-
-class ClienteRespuesta(ClienteBase):
-    model_config = ConfigDict(from_attributes=True)
-
-    id: int
 
 
 @router.get("", response_model=list[ClienteRespuesta])
