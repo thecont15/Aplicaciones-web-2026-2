@@ -1,0 +1,4 @@
+PRESENTACION DE PARCIAL 2
+
+
+VIDEO SEBASTIAN benavides:https://correoitmedu-my.sharepoint.com/:v:/g/personal/sebastianbenavides318826_correo_itm_edu_co/IQCBNdjM17UdRKRK5b_Kj9CqAQc7i1tyuAyFemz5PnW9FHI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=a8pgJI
