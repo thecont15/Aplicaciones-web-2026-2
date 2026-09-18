@@ -4,8 +4,10 @@ from fastapi import FastAPI
 
 from src.database.database import engine
 from src.entities.inventario import Inventario
+from src.entities.producto import Producto
 from src.entities.vendedor import Vendedor
 from src.routers.inventario import router as inventario_router
+from src.routers.producto import router as producto_router
 from src.routers.vendedor import router as vendedor_router
 
 
@@ -13,12 +15,14 @@ from src.routers.vendedor import router as vendedor_router
 async def lifespan(app: FastAPI):
     Vendedor.metadata.create_all(bind=engine)
     Inventario.metadata.create_all(bind=engine)
+    Producto.metadata.create_all(bind=engine)
     yield
 
 
 app = FastAPI(title="API de Vendedores", lifespan=lifespan)
 app.include_router(vendedor_router)
 app.include_router(inventario_router)
+app.include_router(producto_router)
 
 
 @app.get("/")
