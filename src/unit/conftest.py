@@ -9,11 +9,11 @@ from sqlalchemy.pool import StaticPool
 
 os.environ.setdefault("DATABASE_URL", "sqlite://")
 
-from src.database.database import Base, get_db
-from src.routers.cliente import router as cliente_router
-from src.routers.inventario import router as inventario_router
-from src.routers.producto import router as producto_router
-from src.routers.vendedor import router as vendedor_router
+from src.database.database import Base, get_db  # noqa: E402
+from src.routers.cliente import router as cliente_router  # noqa: E402
+from src.routers.inventario import router as inventario_router  # noqa: E402
+from src.routers.producto import router as producto_router  # noqa: E402
+from src.routers.vendedor import router as vendedor_router  # noqa: E402
 
 
 @pytest.fixture
