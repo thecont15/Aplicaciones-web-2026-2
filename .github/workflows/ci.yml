@@ -35,8 +35,9 @@ jobs:
       - name: Ejecutar pruebas con Pytest
         env:
           DATABASE_URL: sqlite://
+          PYTHONPATH: .
         run: |
-          pytest -v
+          python -m pytest -v
 
       - name: Construir imagen Docker
         run: |
@@ -44,7 +45,7 @@ jobs:
 
       - name: Ejecutar y verificar contenedor Docker
         run: |
-          docker run -d --name test-api -p 8000:8000 api-itm:${{ github.sha }}
+          docker run -d --name test-api -p 8000:8000 -e DATABASE_URL="sqlite:///./test.db" api-itm:${{ github.sha }}
           sleep 3
           docker logs test-api
           docker stop test-api
