@@ -16,3 +16,4 @@ VIDEO JOHAN: https://correoitmedu-my.sharepoint.com/:v:/g/personal/johanbermudez
 
 VIDEO DANIEL Carmona (Daproyect): https://correoitmedu-my.sharepoint.com/:v:/g/personal/danielcarmona306316_correo_itm_edu_co/IQDr15U1J8ZTT744cDvAj3jOAT4_NSFp1PnPrFah1TK-efI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Jq0RPE
 
+VIDEO EMMANUEL CARDENAS: https://correoitmedu-my.sharepoint.com/:v:/g/personal/emmanuelcardenas327087_correo_itm_edu_co/IQA_Py9gHDeNQbsxcCPPE40AARyk0wfY6PeM-BP6KgcrbYg
