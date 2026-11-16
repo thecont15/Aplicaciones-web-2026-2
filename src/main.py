@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.database.database import engine
 from src.entities.cliente import Cliente
@@ -23,6 +24,20 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="API de la Clase", lifespan=lifespan)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "https://aplicaciones-y-servicios-web26.web.app",
+        "https://aplicaciones-y-servicios-web26.firebaseapp.com",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(vendedor_router)
 app.include_router(inventario_router)
 app.include_router(cliente_router)
