@@ -24,25 +24,17 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="API de la Clase", lifespan=lifespan)
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=[
-#         "http://localhost:3000",
-#         "http://localhost:5173",
-#         "http://127.0.0.1:3000",
-#        "http://127.0.0.1:5173",
-#        "https://aplicaciones-y-servicios-web26.web.app",
-#        "https://aplicaciones-y-servicios-web26.firebaseapp.com",
-#    ],
-#    allow_credentials=True,
-#    allow_methods=["*"],
-#    allow_headers=["*"],
-#)
-print("CORS TEST v3")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://aplicaciones-y-servicios-web26.web.app",
+        "https://aplicaciones-y-servicios-web26.firebaseapp.com",
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+    ],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
