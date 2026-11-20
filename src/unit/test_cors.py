@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 ORIGEN_FRONTEND = "http://localhost:4200"
+ORIGEN_FIREBASE = "https://aplicaciones-y-servicios-web26.web.app"
 
 
 def test_cors_permite_origen_del_frontend(client):
@@ -8,6 +9,13 @@ def test_cors_permite_origen_del_frontend(client):
 
     assert respuesta.status_code == HTTPStatus.OK
     assert respuesta.headers["access-control-allow-origin"] == ORIGEN_FRONTEND
+
+
+def test_cors_permite_origen_de_firebase(client):
+    respuesta = client.get("/productos", headers={"Origin": ORIGEN_FIREBASE})
+
+    assert respuesta.status_code == HTTPStatus.OK
+    assert respuesta.headers["access-control-allow-origin"] == ORIGEN_FIREBASE
 
 
 def test_cors_preflight_permite_put_y_delete(client):
