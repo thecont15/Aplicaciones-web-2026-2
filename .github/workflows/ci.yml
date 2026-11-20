@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    name: Verificar calidad del codigo con Pylint
+    name: Verificar Pylint, Pytest y Docker
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,21 @@ jobs:
       - name: Ejecutar Pylint
         run: |
           pylint src --fail-under=7.0 --disable=C0114,C0115,C0116,E0401,R0903
+
+      - name: Ejecutar pruebas con Pytest
+        env:
+          DATABASE_URL: sqlite://
+          PYTHONPATH: .
+        run: |
+          python -m pytest -v
+
+      - name: Construir imagen Docker
+        run: |
+          docker build -t api-itm:${{ github.sha }} .
+
+      - name: Ejecutar y verificar contenedor Docker
+        run: |
+          docker run -d --name test-api -p 8000:8000 -e DATABASE_URL="sqlite:///./test.db" api-itm:${{ github.sha }}
+          sleep 3
+          docker logs test-api
+          docker stop test-api
