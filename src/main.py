@@ -13,7 +13,7 @@ from src.routers.inventario import router as inventario_router
 from src.routers.producto import router as producto_router
 from src.routers.vendedor import router as vendedor_router
 
-
+print("CORS v2 - orígenes cargados")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Vendedor.metadata.create_all(bind=engine)
