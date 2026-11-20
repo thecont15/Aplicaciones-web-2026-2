@@ -24,9 +24,20 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="API de la Clase", lifespan=lifespan)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200", "http://127.0.0.1:4200"],
+    allow_origins=[
+        "https://aplicaciones-y-servicios-web26.web.app",
+        "https://aplicaciones-y-servicios-web26.firebaseapp.com",
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:4200",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:4200",
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

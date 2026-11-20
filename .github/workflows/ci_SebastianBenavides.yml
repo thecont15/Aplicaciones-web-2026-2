@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: sqlite://
 
     steps:
       - name: Checkout del repositorio
@@ -70,8 +70,6 @@ jobs:
           python -m scripts.verificar_bd
 
       - name: Ejecutar tests con pytest
-        env:
-          DATABASE_URL: sqlite://
         run: python -m pytest -q
 
       - name: Construir imagen Docker
